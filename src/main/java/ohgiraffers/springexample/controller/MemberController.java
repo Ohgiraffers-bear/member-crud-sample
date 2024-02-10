@@ -1,19 +1,17 @@
 package ohgiraffers.springexample.controller;
 
-import ohgiraffers.springexample.aggregate.dto.member.JoinMemberResponse;
-import ohgiraffers.springexample.aggregate.dto.member.JoinMemberRequest;
+import lombok.RequiredArgsConstructor;
+import ohgiraffers.springexample.aggregate.dto.member.*;
 import ohgiraffers.springexample.service.MemberService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/member")
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/members")
 public class MemberController {
 
-    private MemberService memberService;
+    private final MemberService memberService;
 
     @PostMapping
     public ResponseEntity<JoinMemberResponse> joinMember(@RequestBody JoinMemberRequest joinMemberRequest) {
@@ -21,5 +19,29 @@ public class MemberController {
         JoinMemberResponse joinMemberResponse = memberService.join(joinMemberRequest);
 
         return ResponseEntity.ok(joinMemberResponse);
+    }
+
+    @GetMapping("/{memberNo}")
+    public ResponseEntity<FindMemberResponse> findMember(@PathVariable Long memberNo) {
+
+        FindMemberResponse findMemberResponse = memberService.findByNo(memberNo);
+
+        return ResponseEntity.ok(findMemberResponse);
+    }
+
+    @PutMapping("/{memberNo}")
+    public ResponseEntity<UpdateMemberResponse> updateMember(@PathVariable Long memberNo, @RequestBody UpdateMemberRequest updateMemberRequest) {
+
+        UpdateMemberResponse updateMemberResponse = memberService.update(memberNo, updateMemberRequest);
+
+        return ResponseEntity.ok(updateMemberResponse);
+    }
+
+    @DeleteMapping("/{memberNo}")
+    public ResponseEntity<DeleteMemberResponse> deleteMember(@PathVariable Long memberNo) {
+
+        DeleteMemberResponse deleteMemberResponse = memberService.delete(memberNo);
+
+        return ResponseEntity.ok(deleteMemberResponse);
     }
 }

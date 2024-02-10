@@ -7,9 +7,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class JoinMemberResponse {
+public class FindMemberResponse {
 
-    private long memberId;
+    private Long memberNo;
     private String memberName;
-
 }

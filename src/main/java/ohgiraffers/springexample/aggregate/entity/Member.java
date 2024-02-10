@@ -11,6 +11,7 @@ import lombok.*;
 @Builder
 @Table(name = "member_tb")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Member {
 
     @Id
@@ -21,8 +22,8 @@ public class Member {
 
     private String password;
 
-    public Member(long memberNo, String memberName, String password) {
-        this.memberNo = memberNo;
+
+    public void update(String memberName, String password) {
         this.memberName = memberName;
         this.password = password;
     }

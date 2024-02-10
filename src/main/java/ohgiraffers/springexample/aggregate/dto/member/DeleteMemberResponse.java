@@ -5,11 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
-public class JoinMemberResponse {
+@AllArgsConstructor
+public class DeleteMemberResponse {
 
-    private long memberId;
+    private Long memberNo;
     private String memberName;
-
+    private String deleteMessage;
 }
